@@ -1,35 +1,20 @@
 # pi-led
 Get up and running programming LEDs like the NeoPixels from Adafruit using a Raspberry Pi and Python. Using the Raspberry Pi may not be the most power efficient, but it has built in wifi, which will save time. So if power isn't a consideration, this is an amazing way to get started quickly.
 
-### Run the program
-`sudo python3 neospark.py`
+## Setup to run on start
+1. Copy the service file to etc (note the ExecStart and WorkingDirectory properties)
 
-### Run on startup
-1. Create a service
+`cp neopixels.service /etc/systemd/system`
 
-`nano /etc/systemd/system/neopixels.service`
-
-2. Edit the service
-```[Unit]
-Description=NeoPixels Startup Service
-After=network.target
-
-[Service]
-ExecStart=/usr/bin/python3 neospark.py
-WorkingDirectory=/home/pi/Desktop/pi-led
-StandardOutput=inherit
-StandardError=inherit
-Restart=always
-User=root
-
-[Install]
-WantedBy=multi-user.target
-```
-
-3. Start the service
+2. Start the service
 
 `sudo systemctl start neopixels.service`
 
-### Restart after editing
+## Editing
+If configured to run on start, restart the service: 
 
 `sudo systemctl restart neopixels.service`
+
+Or run manually to see compiler output:
+
+`sudo python3 neopixels.py`
